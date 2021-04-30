@@ -1,0 +1,44 @@
+﻿@model IEnumerable<EventManagement.Models.Event>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.EventType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @using (Html.BeginForm("Delete", "Event", new { eventId = item.EventID }))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EventType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.EventID">Edit</a> |
+                        <button type="submit" value="Delete" onclick="return confirm('Are you sure to delete the event?')">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,111 @@
+﻿@model EventManagement.ViewModels.BookingEventViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+@using (Html.BeginForm("Details", "ShowBookingDetails", FormMethod.Post, new { id = Model.BookingId }))
+{
+    <div>
+        <dl class="row">
+        <dt class="col-sm-2">
+            <label>Event Name</label>
+        </dt>
+        <dd class="col-sm-10">
+            <input type="hidden" asp-for="@Model.BookingId" />
+            @Html.DisplayFor(model => model.EventType)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Venue</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VenueName)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Venue Cost</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.VenueCost)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Food Type</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodType)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Meal Type</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MealType)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Number of people</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberofPeople)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Food cost / plate</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.FoodCost)
+        </dd>
+        <dt class="col-sm-2">
+            <label>VenNumber of peopleue</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.NumberofPeople)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Total Food Cost</label>
+        </dt>
+        <dd class="col-sm-10">
+            <label>@(Model.FoodCost * Model.NumberofPeople)</label>
+        </dd>
+        <dt class="col-sm-2">
+            <label>Overall cost</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalCost)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Booking Date</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BookingDate)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Created date</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Createdate)
+        </dd>
+        <dt class="col-sm-2">
+            <label>User Name</label>
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </dd>
+        <dt class="col-sm-2">
+            <label>Status</label>
+        </dt>
+        <dd class="col-sm-10">
+            <label>
+                @(Model.Status == "P" ? "Processing" : Model.Status == "A" ? "Approved" : "Rejected")
+            </label>
+        </dd>
+        @*<label>
+                @(Model.Status== "P"?"Processing": Model.Status== "A"?"Approved":"Rejected")
+            </label>*@
+        <dt class="col-sm-2">
+            <a asp-action="Index" asp-controller="ShowBookingDetails">Back to list</a>
+        </dt>
+        <dd class="col-sm-10">
+            <div class="form-group">
+                <input id="btnSubmit" type="submit" name="submit" class="btn btn-success" value="Approve" />
+                <input id="btnReject" type="submit" name="submit" class="btn btn-success" value="Reject" />
+            </div>
+        </dd>
+        </dl>
+    </div>
+}

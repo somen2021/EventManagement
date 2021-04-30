@@ -1,0 +1,55 @@
+﻿@*@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet*@
+@using Microsoft.AspNetCore.Http;
+@using Microsoft.AspNetCore.Identity;
+@inject SignInManager<IdentityUser> _signinManager;
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Dashboard</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container">
+                <a asp-area="" asp-controller="Customer" asp-action="Dashboard" class="navbar-brand">Dashboard</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item"><a asp-area="" asp-controller="BookingEvent" asp-action="Index">Book Event</a></li>
+                        <li class="nav-item"><a asp-area="" asp-controller="Customer" asp-action="ChangePassword">ChangePassword</a></li>
+                        @if (_signinManager.IsSignedIn(User))
+                        {
+            <li class="nav-item">
+                <form method="post" asp-controller="Account" asp-action="Logout">
+                    <button type="submit" value="Logout" class="nav-link text-dark">Logout @User.Identity.Name</button>
+                </form>
+            </li> }
+                        else
+                        {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Login">Login</a>
+            </li>}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+
+    @RenderSection("Scripts", required: false)
+
+    <link href="~/lib/dataTablesScripts/dataTables.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/lib/dataTablesScripts/responsive.bootstrap.min.css" rel="stylesheet" />
+    <script src="~/lib/dataTablesScripts/jquery.dataTables.min.js"></script>
+    <script src="~/lib/dataTablesScripts/dataTables.bootstrap4.min.js"></script>
+</body>
+</html>

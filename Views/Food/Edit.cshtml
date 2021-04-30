@@ -1,0 +1,96 @@
+﻿@model EventManagement.Models.Food
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Food</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="FoodID" />
+            @*<div class="form-group">
+                    <label asp-for="FoodType" class="control-label"></label>
+                    <input asp-for="FoodType" class="form-control" />
+                    <span asp-validation-for="FoodType" class="text-danger"></span>
+                </div>*@
+        <div class="form-group">
+            <label class="control-label" asp-for="FoodType">Food Type</label>
+            @{
+                if (Convert.ToInt32(Model.FoodType) == 1)
+                {
+                    <input asp-for="FoodType" id="FoodType1" value="1" type="radio" checked="checked" />;
+                }
+                else
+                {
+                    <input asp-for="FoodType" id="FoodType1" value="1" type="radio" />;
+                }
+
+            }Veg
+            @{
+                if (Convert.ToInt32(Model.FoodType) == 2)
+                {
+                    <input asp-for="FoodType" id="FoodType1" value="2" type="radio" checked="checked" />;
+                }
+                else
+                {
+                    <input asp-for="FoodType" id="FoodType1" value="2" type="radio" />;
+                }
+
+            }
+            Non-Veg
+            <span asp-validation-for="FoodType" class="text-danger"></span>
+        </div>
+            <div class="form-group">
+                <input asp-for="Createdby" class="form-control" value="@User.Identity.Name" style="display:none;" />
+            </div>
+
+            <div class="form-group">
+                <label asp-for="FoodCost" class="control-label"></label>
+                <input asp-for="FoodCost" class="form-control" />
+                <span asp-validation-for="FoodCost" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                @{
+                    if (Convert.ToInt32(Model.FoodType) == 1)
+                    {
+                        <input asp-for="MealType" id="FoodType1" value="1" type="radio" checked="checked" />;
+                    }
+                    else
+                    {
+                        <input asp-for="MealType" id="FoodType1" value="1" type="radio" />;
+                    }
+
+                }Lunch
+                @{
+                    if (Convert.ToInt32(Model.FoodType) == 2)
+                    {
+                        <input asp-for="MealType" id="FoodType1" value="2" type="radio" checked="checked" />;
+                    }
+                    else
+                    {
+                        <input asp-for="MealType" id="FoodType1" value="2" type="radio" />;
+                    }
+
+                }Dinner
+                
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

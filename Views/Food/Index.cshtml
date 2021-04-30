@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EventManagement.Models.Food>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{ Layout = "~/Views/Shared/_AdminLayout.cshtml"; }
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdby)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.MealType)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @using (Html.BeginForm("Delete", "Food", new { foodid = item.FoodID }))
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Createdby)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Createdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FoodCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MealType)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.FoodID">Edit</a> |
+                        <button type="submit" value="Delete" onclick="return confirm('Are you sure to delete the food type?')">Delete</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<EventManagement.ViewModels.BookingEventViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <label>Event Name</label>
+            </th>
+            <th>
+                <label>Venue</label>
+            </th>
+            <th>
+                <label>Food Type</label>
+            </th>
+            <th>
+                <label>Meal Type</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberofPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CreatedBy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BookingDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="hidden" asp-for="@item.BookingId" />
+                    @Html.DisplayFor(modelItem => item.EventType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.VenueName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FoodType)
+                </td>
+                <td>
+                    <label>
+                        @(item.MealType == "1" ? "Veg" : "Non-Veg")
+                    </label>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.NumberofPeople)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TotalCost)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CreatedBy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Createdate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.BookingDate)
+                </td>
+                <td>
+                    <label>
+                        @(item.Status== "P"?"Processing": @item.Status== "A"?"Approved":"Rejected")
+                    </label>
+                </td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.BookingId">Details</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

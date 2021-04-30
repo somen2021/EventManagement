@@ -1,0 +1,89 @@
+﻿@model IEnumerable<EventManagement.ViewModels.BookingEventViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+
+
+<p>
+    <a asp-action="Create">Create Event</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+
+            <th>
+                @Html.DisplayNameFor(model => model.EventType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VenueName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FoodType)
+            </th>
+            <th>
+                <label class="control-label">Meal Type</label>
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NumberofPeople)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.TotalCost)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Createdate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Status)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            @using (Html.BeginForm("Delete", "BookingEvent", new { id = item.BookingId }))
+            {
+                <tr>
+                    <td>
+                        <input type="hidden" asp-for="@item.EventId" />
+                        @Html.DisplayFor(modelItem => item.EventType)
+                    </td>
+                    <td>
+                        <input type="hidden" asp-for="@item.VenueId" />
+                        @Html.DisplayFor(modelItem => item.VenueName)
+                    </td>
+                    <td>
+                        <input type="hidden" asp-for="@item.FoodId" />
+                        @Html.DisplayFor(modelItem => item.FoodType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MealType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NumberofPeople)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.TotalCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Createdate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        <input type="hidden" asp-for="@item.BookingId" />
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.BookingId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.BookingId">Details</a> |
+                        @*<a asp-action="Delete" asp-route-id="@item.BookingId">Delete</a>|*@
+                        <button type="submit" value="Delete" onclick="return confirm('Are you sure to cancel the booking?')">Cancel</button>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

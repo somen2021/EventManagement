@@ -1,0 +1,65 @@
+﻿@model EventManagement.ViewModels.BookingEventViewModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+@{ Layout = "~/Views/Shared/_LayoutCustomer.cshtml"; }
+<h1>Details</h1>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Details">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="BookingId" />
+            <div class="form-group">
+                <label class="control-label">Event Type</label>:
+                <label class="control-label">@Model.EventType</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Venue Name</label>:
+                <label class="control-label">@Model.VenueName</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Venue Cost</label>:
+                <label class="control-label">@Model.VenueCost</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Food Type</label>:
+                <label class="control-label">@Model.FoodType</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Meal Type</label>:
+                <label class="control-label">@Model.MealType</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Number of People</label>:
+                <label class="control-label">@Model.NumberofPeople</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Food cost/Plate</label>:
+                <label class="control-label">@Model.FoodCost</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Total Cost</label>:
+                <label class="control-label">@Model.TotalCost</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Booking Date</label>:
+                <label class="control-label">@Model.BookingDate</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Status</label>:
+                <label class="control-label">@Model.Status</label>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
